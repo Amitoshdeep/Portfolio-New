@@ -213,7 +213,7 @@
         <!-- Contact us -->
         <section class="contact-us" data-aos="fade-right">
             <h2>CONTACT</h2>
-            <form action="https://formspree.io/f/meoowzvb" method="POST">
+            <form action="https://formspree.io/f/meoowzvb" method="POST" onsubmit="window.open('/pages/thnx.html','_blank')">
                 <label>
                     <p>Your Name:</p>
                     <input type="text" name="name" required>
@@ -312,8 +312,40 @@
         }
 
         // Apply typewriter effect to <h1>
-        typewriterEffect("typewriter", "Amitoshdeep Singh", 500);
+        typewriterEffect("typewriter", "Amitoshdeep Singh", 750);
     </script>
-      
+    
+    <script>
+        // Number of dots
+        const NUM_DOTS = 50; 
+
+        // Random function to generate values
+        const random = (min, max) => Math.random() * (max - min) + min;
+
+        // Create random dots
+        const createDot = () => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            
+            const size = random(5, 15); // Random size between 5px and 15px
+            const duration = random(5, 15); // Random duration between 5s and 15s for animation
+            const dx = random(-200, 200); // Horizontal movement range
+            const dy = random(-200, 200); // Vertical movement range
+
+            dot.style.width = `${size}px`;
+            dot.style.height = `${size}px`;
+            dot.style.top = `${random(0, 100)}vh`; // Random vertical starting position
+            dot.style.left = `${random(0, 100)}vw`; // Random horizontal starting position
+            dot.style.animation = `float ${duration}s ease-in-out infinite alternate`;
+            dot.style.setProperty('--dx', `${dx}px`);
+            dot.style.setProperty('--dy', `${dy}px`);
+
+            document.body.appendChild(dot);
+        };
+
+        // Create multiple random dots
+        Array.from({ length: NUM_DOTS }).forEach(createDot);
+
+    </script>
 </body>
 </html>

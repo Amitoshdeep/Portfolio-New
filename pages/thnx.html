@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Amitoshdeep Portfolio</title>
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 10; /* Ensures content is above dots */
+        }
+
+        .thnx {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards, slideUp 1s ease-in-out forwards;
+            cursor: pointer;
+        }
+
+        .thnx:hover {
+            color: #2980b9;
+            transform: scale(1.05);
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .submitted {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #7f8c8d;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-in-out forwards 0.5s;
+        }
+
+        .dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #2980b9;
+            border-radius: 50%;
+            opacity: 0.8;
+            pointer-events: none; /* Prevents interference with cursor */
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(var(--dx, 100px), var(--dy, -100px));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <p class="thnx" onclick="revealMessage()">Thank you for contacting us.</p>
+        <p class="submitted" id="submitted">Your form has been submitted successfully.</p>
+    </div>
+
+    <script>
+        const NUM_DOTS = 50; // Number of dots
+        const DOT_SIZE_MIN = 5; // Minimum size (px)
+        const DOT_SIZE_MAX = 15; // Maximum size (px)
+        const SCATTER_RADIUS = 100; // Radius within which dots will scatter
+        const ANIMATION_DURATION_MIN = 5; // Minimum animation duration (s)
+        const ANIMATION_DURATION_MAX = 15; // Maximum animation duration (s)
+
+        const random = (min, max) => Math.random() * (max - min) + min;
+
+        const createDot = () => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            const size = random(DOT_SIZE_MIN, DOT_SIZE_MAX);
+            const duration = random(ANIMATION_DURATION_MIN, ANIMATION_DURATION_MAX);
+            const dx = random(-200, 200); // Horizontal float distance
+            const dy = random(-200, 200); // Vertical float distance
+
+            dot.style.width = `${size}px`;
+            dot.style.height = `${size}px`;
+            dot.style.top = `${random(0, 100)}vh`;
+            dot.style.left = `${random(0, 100)}vw`;
+            dot.style.animation = `float ${duration}s ease-in-out infinite alternate`;
+            dot.style.setProperty('--dx', `${dx}px`);
+            dot.style.setProperty('--dy', `${dy}px`);
+
+            document.body.appendChild(dot);
+            return dot;
+        };
+
+        const dots = Array.from({ length: NUM_DOTS }, createDot);
+
+        // Add scatter effect
+        document.body.addEventListener('mousemove', (e) => {
+            const { clientX: mouseX, clientY: mouseY } = e;
+
+            dots.forEach(dot => {
+                const rect = dot.getBoundingClientRect();
+                const dotX = rect.left + rect.width / 2;
+                const dotY = rect.top + rect.height / 2;
+
+                const dx = mouseX - dotX;
+                const dy = mouseY - dotY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < SCATTER_RADIUS) {
+                    const angle = Math.atan2(dy, dx);
+                    const scatterX = -Math.cos(angle) * 50; // Push strength
+                    const scatterY = -Math.sin(angle) * 50;
+
+                    // Scatter effect
+                    dot.style.transform = `translate(${scatterX}px, ${scatterY}px)`;
+                } else {
+                    // Reset to floating state
+                    dot.style.transform = '';
+                }
+            });
+        });
+
+        // Highlight message
+        function revealMessage() {
+            const submitted = document.getElementById("submitted");
+            submitted.style.color = "#2980b9";
+            submitted.style.fontWeight = "600";
+        }
+    </script>
+</body>
+</html>
