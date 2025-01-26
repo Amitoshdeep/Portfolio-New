@@ -27,6 +27,8 @@ body,html{
 
     font-family: "Poppins", serif;
     cursor: default;
+
+    z-index: 10;
 }
 
 /* Prevent animations from extending the height */
@@ -372,8 +374,27 @@ form button{
 }
 
 
+/* DOTS */
+/* Dot styles */
+.dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #2980b9;
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none; /* Prevents interference with interactions */
+}
 
-
+/* Keyframe for dot floating animation */
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(var(--dx, 100px), var(--dy, -100px));
+    }
+}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
