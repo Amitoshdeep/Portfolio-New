@@ -157,23 +157,6 @@
 
                 <div class="Pcards" data-aos="fade-right">
                     <div class="PiCon">
-                        <img src="/assets/projects/volex.jpg" alt="Volex Velocity">
-                    </div>
-                    <div class="details">
-                        <p>Volex Velocity</p>
-                        <div class="links">
-                            <p onclick="window.open('https://amitoshiro.itch.io/volex-velocity','_blank')">live site</p>
-                        </div>
-                    </div>
-                    <div class="prFoot">
-                        <p>Unity</p>
-                        <p>C#</p>
-                    </div>
-                </div>
-            
-                
-                <div class="Pcards large" data-aos="fade-left">
-                    <div class="PiCon">
                         <img src="/assets/projects/qrgen.png" alt="QR Gen">
                     </div>
                     <div class="details">
@@ -187,6 +170,24 @@
                         <p>HTML5</p>
                         <p>CSS</p>
                         <p>JavaScript</p>
+                    </div>
+                </div>
+                    
+                    
+                <div class="Pcards large" data-aos="fade-left">
+                        
+                    <div class="PiCon">
+                        <img src="/assets/projects/volex.jpg" alt="Volex Velocity">
+                    </div>
+                    <div class="details">
+                        <p>Volex Velocity</p>
+                        <div class="links">
+                            <p onclick="window.open('https://amitoshiro.itch.io/volex-velocity','_blank')">live site</p>
+                        </div>
+                    </div>
+                    <div class="prFoot">
+                        <p>Unity</p>
+                        <p>C#</p>
                     </div>
                 </div>
                 
@@ -315,37 +316,5 @@
         typewriterEffect("typewriter", "Amitoshdeep Singh", 750);
     </script>
     
-    <script>
-        // Number of dots
-        const NUM_DOTS = 50; 
-
-        // Random function to generate values
-        const random = (min, max) => Math.random() * (max - min) + min;
-
-        // Create random dots
-        const createDot = () => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            
-            const size = random(5, 15); // Random size between 5px and 15px
-            const duration = random(5, 15); // Random duration between 5s and 15s for animation
-            const dx = random(-200, 200); // Horizontal movement range
-            const dy = random(-200, 200); // Vertical movement range
-
-            dot.style.width = `${size}px`;
-            dot.style.height = `${size}px`;
-            dot.style.top = `${random(0, 100)}vh`; // Random vertical starting position
-            dot.style.left = `${random(0, 100)}vw`; // Random horizontal starting position
-            dot.style.animation = `float ${duration}s ease-in-out infinite alternate`;
-            dot.style.setProperty('--dx', `${dx}px`);
-            dot.style.setProperty('--dy', `${dy}px`);
-
-            document.body.appendChild(dot);
-        };
-
-        // Create multiple random dots
-        Array.from({ length: NUM_DOTS }).forEach(createDot);
-
-    </script>
 </body>
 </html>
